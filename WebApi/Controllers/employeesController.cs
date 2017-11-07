@@ -10,6 +10,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using EmployeeDataAccess;
 using System.Web.Http.Cors;
+using System.Threading;
 
 namespace WebApi.Controllers
 {
@@ -21,9 +22,23 @@ namespace WebApi.Controllers
 
         // GET: api/employees
    
-        public IQueryable<employee> Getemployees()
+        [BasicAuthentication]
+        public HttpResponseMessage Getemployees(string gender="All")
         {
-            return db.employees;
+            string username = Thread.CurrentPrincipal.Identity.Name;
+            switch (username.ToLower())
+            {
+                case "all":
+                    return Request.CreateResponse(HttpStatusCode.OK, db.employees);
+                case "male":
+                    return Request.CreateResponse(HttpStatusCode.OK, db.employees.Where(e => e.gender == "male"));
+                case "female":
+                    return Request.CreateResponse(HttpStatusCode.OK, db.employees.Where(e => e.gender == "female"));
+                default:
+                    return Request.CreateResponse(HttpStatusCode.BadRequest);
+            }
+
+            
         }
         [DisableCors]
         //GET: api/employees?fname=hanson
