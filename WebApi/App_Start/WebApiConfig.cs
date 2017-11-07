@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using WebApiContrib.Formatting.Jsonp;
+using System.Web.Http.Cors;
 
 namespace WebApi
 {
@@ -22,6 +24,13 @@ namespace WebApi
 
             config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
             config.Formatters.Remove(config.Formatters.XmlFormatter);
+
+            //var jsonpFormatter = new JsonpMediaTypeFormatter(config.Formatters.JsonFormatter);
+            ////config.Formatters.Add(jsonpFormatter);
+            //config.Formatters.Insert(0, jsonpFormatter);
+            //EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
+            //config.EnableCors(cors);
+            config.EnableCors();
         }
     }
 }

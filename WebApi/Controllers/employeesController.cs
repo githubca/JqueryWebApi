@@ -9,19 +9,22 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using EmployeeDataAccess;
+using System.Web.Http.Cors;
 
 namespace WebApi.Controllers
 {
+    [EnableCorsAttribute("http://localhost:61884", "*","*")]
     public class employeesController : ApiController
     {
         private TestEntities db = new TestEntities();
 
         // GET: api/employees
+   
         public IQueryable<employee> Getemployees()
         {
             return db.employees;
         }
-
+        [DisableCors]
         //GET: api/employees?fname=hanson
         public IQueryable<employee> GetEmployeeByFirstName(string fname)
         {
