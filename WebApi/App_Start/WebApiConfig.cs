@@ -31,6 +31,8 @@ namespace WebApi
             //EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
             //config.EnableCors(cors);
             config.EnableCors();
+
+            config.Filters.Add(new RequireHttpsAttribute());
         }
     }
 }

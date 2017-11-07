@@ -14,6 +14,7 @@ using System.Web.Http.Cors;
 namespace WebApi.Controllers
 {
     [EnableCorsAttribute("http://localhost:61884", "*","*")]
+    [RequireHttps]
     public class employeesController : ApiController
     {
         private TestEntities db = new TestEntities();

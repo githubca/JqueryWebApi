@@ -11,7 +11,7 @@
             $('#btnGetAll').click(function () {
                 $.ajax({
                     type: 'GET',
-                    url: 'http://localhost:53194/api/employees',
+                    url: 'https://localhost:44303/api/employees',
                     dataType: 'json',
                     success: function (data) {
                         ul.empty();
